@@ -1,107 +1,67 @@
-canvas = document.getElementById('myCanvas');
-/*
-Correct the function name and use a 2d context
-*/
-ctx = canvas.getcontext("2d");
+var grades = [];
+        var update_scores = function () {
+           var val = get_item_list(grades);
+           //Add the appropriate id names to read scores, student_name
+           document.getElementById("scores").value =val ;
+           document.getElementById("student_name").value = "";
+           document.getElementById("score").value = "";   
+           document.getElementById("student_name").focus();
+        }    
+        //Function to add last, first, score to studentGrade
+        var student_grade_add_click = function() {
+        var last = document.getElementById("student_name").value;
+                var score = parseFloat(document.getElementById('score').value);
+                grades.push([last, score]);  
+                update_scores();
+                document.getElementById("average_score").value = getAverageScore(grades);
+        }
 
-car1_width = 120;
-car1_height = 70;
-car1_image = "car1.png";
-car1_x = 10;
-car1_y = 10;
-
-car2_width = 120;
-car2_height = 70;
-car2_image = "car2.png";
-car2_x = 10;
-car2_y = 100;
-
-background_image = "racing.jpg";
-
-function add() {
-	background_imgTag = new Image(); //defining a variable with a new image
-	background_imgTag.onload = uploadBackground; // setting a function, onloading this variable
-	background_imgTag.src = background_image;   // load image
-
-	car1_imgTag = new Image(); //defining a variable with a new image
-	/*
-	Upload the correct car
-	*/
-	car1_imgTag.onload = uploadcar1; // setting a function, onloading this variable
-	/*
-	Assign a correct car_image variable
-	*/
-	car1_imgTag.src = car_image1	;   // load image
-
-	car2_imgTag = new Image(); //defining a variable with a new image
-	car2_imgTag.onload = uploadcar2; // setting a function, onloading this variable
-	car2_imgTag.src = car2_image;   // load image
-}
-
-function uploadBackground() {
-	/*
-	Correct the function names
-	*/
-	ctx.drawImage(background_imgTag, 0, 0, canvas.width, canvas.height);
-}
-
-function uploadcar1() {
-	/*
-	Correct the function names
-	*/
-	ctx.drawImage(car1_imgTag, car1_x, car1_y, car1_width, car1_height);
-}
-function uploadcar2() {
-	/*
-	Correct the function names
-	*/
-	ctx.drawImage(car2_imgTag, car2_x, car2_y, car2_width, car2_height);
-}
-
-window.addEventListener("keydown", my_keydown);
-
-function my_keydown(e)
-{
-	keyPressed = e.keyCode;
-	console.log(keyPressed);
-		if(keyPressed == '38')
-		{
-			car1_up();
-			console.log("up arrow key");
-		}
-		if(keyPressed == '40')
-		{
-			car1_down();
-			console.log("down arrow key");
-		}
-		if(keyPressed == '37')
-		{
-			car1_left();
-			console.log("left arrow key");
-		}
-		if(keyPressed == '39')
-		{
-			car1_right();
-			console.log("right arrow key");
-		}
-		if(keyPressed == '87')
-		{
-			car2_up();
-			console.log("key w");
-		}
-		if(keyPressed == '83')
-		{
-			car2_down();
-			console.log("key s");
-		}
-		if(keyPressed == '65')
-		{
-			car2_left();
-			console.log("key a");
-		}
-		if(keyPressed == '68')
-		{
-			car2_right();
-			console.log("key d");
-		}
-}
+        var get_item_list = function(item_list) {
+           if ( item_list.length == 0 ) {
+              return "";
+           }
+           var list = "";
+           for ( var i = 0; i < item_list.length; i++) {
+              var current = item_list[i];
+              for ( var attribute in current ) {
+                  list += current[attribute] + ", "; 
+              }
+          list += "\n";  
+           }
+           return list;
+        }
+        
+        //Average function
+        function getAverageScore(grades){ 
+        
+        var numberOfStudents = grades.length; 
+        var sum = 0; 
+        if(numberOfStudents > 0) { 
+            for(var i=0; i < numberOfStudents; i++) {
+                sum += grades[i][1]; 
+            }
+        return sum/numberOfStudents; 
+        }
+        return 0; 
+        }
+        
+        function clear_click()
+        {
+                document.getElementById("form").reset();
+                document.getElementById("average_score").value="";
+                grades.splice(0, grades.length);  
+        }
+        
+        var sort_click = function () 
+        {
+        //Add the sort() function to sort students by thier names
+        grades.sort();
+        update_scores();
+        }
+        
+        window.onload = function() {
+                document.getElementById("add_button").onclick = student_grade_add_click;
+                document.getElementById("sort_button").onclick = sort_click;      
+                document.getElementById("student_name").focus();
+        }
+        

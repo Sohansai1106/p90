@@ -1,46 +1,45 @@
 <!DOCTYPE html>
-<html>
+
 <head>
-<style>
-body{
-	background-image: url("racing.gif");
-    background-position: center;
-    background-size: cover;
-}
-#myCanvas
-{
-    margin-top: 30px;
-	border-width:10px;
-	background-color: white; 
-	border-style:ridge;
-}
-
-h1,h4
-{
-	color: white !important;
-}
-</style>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-	<title>Car Racing</title>
+<title>Student Assesment</title>
+    <link rel="stylesheet" type="text/css" href="style_86.css" />
+    <script type="text/javascript" src="main_86.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Molengo' rel='stylesheet' type='text/css'>
 </head>
-<body onload="add()">
 
+<body>
 <center>
-<h1>Car Racing</h1>
-<h1>Game Status : <span id="game_status"></span></h1>
-<!-- Correct the id name of the canvas. Write: canvas id = "myCanvas" -->
-<canvas id="myCanvas" width="800" height="600">
-	</canvas>
-<h4>
-	<b class="text-danger">NOTE : </b> IF THE CARS ARE NOT VISIBLE PRESS ANY ARROW KEY
+<div id="content">
+    <h1>Enter Student Names and Student Scores</h1>
+    <div class="formLayout">
+        <label class = box1>Student Name:</label>
+        <input type="text" id="student_name"/><br/><br>
 
-</center>
+        <label class = box2>Score:</label>
+        <input type="text" id="score"/><br/><br>
+        
+        <!--Add the code for Sort button here-->
+        <!--Name the button as 'Add Student Score' in the value field-->
+        <label>&nbsp;</label>
+        <input type="button" id="add_button" value="Add Student Score"/><br/>
+    </div>
+
+    <h2>Sort Students by Name</h2>
+
+<form id = "form">
+    <p><textarea id="scores" rows="5" cols="30" disabled="disabled"></textarea></p>
+</form>
+
+    <div class="formLayout">
+        <label>Average score:</label>
+        <input type="text" id="average_score" disabled="disabled"/><br/><br>
+
+        <label>&nbsp;</label>
+        <input type="button" id="clear" value="Clear Student Scores" onclick="clear_click()"/><br/><br>
+
+        <label>&nbsp;</label> 
+        <input type="button" id="sort_button" value="Sort By Student Name"/><br/>
+    </div>
+    </center>
 </body>
-
-<script src="C90_Student_Template.js" type="text/javascript"></script>
-
 </html>
